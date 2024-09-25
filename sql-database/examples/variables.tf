@@ -126,11 +126,6 @@ variable "costBudgetOwner" {
   type        = string
 }
 
-variable "additionalcontext" {
-  description = "used for naming purposes such as 01 or 02"
-  type        = string
-}
-
 variable "costDivision" {
   description = "cost division"
   type        = string
