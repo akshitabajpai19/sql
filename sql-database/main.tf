@@ -1,5 +1,3 @@
-data "azurerm_client_config" "current" {}
-
 data "azurerm_mssql_server" "this" {
   for_each            = var.database_names
   name                = each.value.sql_server_name
