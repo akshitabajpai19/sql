@@ -1,6 +1,5 @@
 locals {
   naming = "${var.resourcetype}${var.appname}${var.env}"
-  name = each.value["name"] != null ? each.value["name"] : "${local.naming}-${var.additionalcontext}"
   tags = tomap({
     appid               = var.appid
     appname             = var.appname
