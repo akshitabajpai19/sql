@@ -1,5 +1,4 @@
 locals {
-  naming = "${var.resourcetype}${var.appname}${var.env}"
   tags = tomap({
     appid               = var.appid
     appname             = var.appname
