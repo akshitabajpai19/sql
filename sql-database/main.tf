@@ -37,6 +37,7 @@ resource "azurerm_mssql_database" "this" {
   secondary_type                                             = lookup(each.value, "secondary_type", null)
 
   tags = merge(each.value["tags"], local.tags)
+  # prevent the possibility of accidental data loss
   lifecycle {
     prevent_destroy = true
   }
