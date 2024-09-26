@@ -148,5 +148,3 @@ variable "costbaseline" {
   description = "year resource created"
   type        = string
 }
-
-

@@ -13,7 +13,6 @@ database_names = {
       new  = "tags"
       test = "new"
     }
-
   }
 
   database02 = {
@@ -42,7 +41,6 @@ database_names = {
       new  = "tags"
       test = "new"
     }
-
   }
 }
 location            = "Central India"
