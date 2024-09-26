@@ -36,7 +36,7 @@ resource "azurerm_mssql_database" "this" {
   transparent_data_encryption_key_automatic_rotation_enabled = lookup(each.value, "transparent_data_encryption_key_automatic_rotation_enabled", null)
   secondary_type                                             = lookup(each.value, "secondary_type", null)
 
-  tags       = merge(each.value["tags"], local.tags)
+  tags = merge(each.value["tags"], local.tags)
   lifecycle {
     prevent_destroy = true
   }

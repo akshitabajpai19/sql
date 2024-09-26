@@ -11,10 +11,10 @@ module "sql-database" {
   costAppOwnerTech    = var.costAppOwnerTech
   costAppOwnerManager = var.costAppOwnerManager
   costBudgetOwner     = var.costBudgetOwner
-  costDivision   = var.costDivision
-  costAllocation = var.costAllocation
-  appFunction    = var.appFunction
-  monthlyBudget  = var.monthlyBudget
-  costbaseline   = var.costbaseline
+  costDivision        = var.costDivision
+  costAllocation      = var.costAllocation
+  appFunction         = var.appFunction
+  monthlyBudget       = var.monthlyBudget
+  costbaseline        = var.costbaseline
   #additionalcontext   = var.additionalcontext
 }
