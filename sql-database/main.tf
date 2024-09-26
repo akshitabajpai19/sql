@@ -37,5 +37,9 @@ resource "azurerm_mssql_database" "this" {
   secondary_type                                             = lookup(each.value, "secondary_type", null)
 
   tags       = merge(each.value["tags"], local.tags)
+  lifecycle {
+    prevent_destroy = true
+  }
+  ''
   depends_on = [data.azurerm_mssql_server.this]
 }
