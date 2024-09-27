@@ -64,10 +64,10 @@ resource "azurerm_postgresql_flexible_server" "posgresflexible" {
   tags                              = var.tags
 
   timeouts {
-    create = "06h"
-    update = "05h"
-    read   = "04h"
-    delete = "04h"
+    create = lookup(var.postgre_sql_timeouts, "create")
+    update = lookup(var.postgre_sql_timeouts, "update")
+    read   = lookup(var.postgre_sql_timeouts, "read")
+    delete = lookup(var.postgre_sql_timeouts, "delete")
   }
 
   dynamic "authentication" {
@@ -124,4 +124,3 @@ resource "azurerm_postgresql_flexible_server_database" "example" {
     prevent_destroy = true
   }
 }
-

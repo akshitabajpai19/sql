@@ -1,25 +1,22 @@
 resource_group_name  = "post-rg"
-virtual_network_name = "vm-test-vnet"
 key_vault_name       = "kv-postgresql27"
 key_vault_rg_name    = "post-rg"
-enable_encryption    = true
-key_vault_key_name   = "kv-key-postgre"
 user_assigned_identity_ids = {
   user01 = {
-    identity_id = "/subscriptions/25538273-e37b-4758-89b1-d352cdac750c/resourceGroups/post-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/new-mi"
+    identity_id = "/subscriptions/XXXXXXXXXXXXXXXXXXXXX/resourceGroups/post-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/new-mi"
   }
 }
 posgresql_server_name = "mtjpostsql45"
-delegated_subnet_id   = "/subscriptions/25538273-e37b-4758-89b1-d352cdac750c/resourceGroups/rg-test/providers/Microsoft.Network/virtualNetworks/vm-test-vnet/subnets/snet-postsqldb"
-private_dns_zone_id   = "/subscriptions/25538273-e37b-4758-89b1-d352cdac750c/resourceGroups/post-rg/providers/Microsoft.Network/privateDnsZones/vkey.postgres.database.azure.com"
+delegated_subnet_id   = "/subscriptions/XXXXXXXXXXXXXXXXXXXXXX/resourceGroups/rg-test/providers/Microsoft.Network/virtualNetworks/vm-test-vnet/subnets/snet-postsqldb"
+private_dns_zone_id   = "/subscriptions/XXXXXXXXXXXXXXXXXXXXXX/resourceGroups/post-rg/providers/Microsoft.Network/privateDnsZones/vkey.postgres.database.azure.com"
 postgres_admin        = "sqladmin"
 posgresql_sku_name    = "GP_Standard_D2s_v3"
 posgresql_storage_mb  = 65536
 postgres_db           = "new-post-db"
 customer_managed_key = {
   c01 = {
-    key_vault_key_id                  = "https://kv-postgresql27.vault.azure.net/keys/kv-key-postgre/88971ddd115549d5b46b7cf604ccfb33"
-    primary_user_assigned_identity_id = "/subscriptions/25538273-e37b-4758-89b1-d352cdac750c/resourcegroups/post-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/new-mi"
+    key_vault_key_id                  = "https://kv-postgresql27.vault.azure.net/keys/kv-key-postgre/XXXXXXXXXXXXXXXXXXXXXX"
+    primary_user_assigned_identity_id = "/subscriptions/XXXXXXXXXXXXXXXXXXXXXX/resourceGroups/post-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/new-mi"
 
   }
 }
@@ -32,9 +29,6 @@ high_availability = {
     high_availability_mode = "SameZone"
   }
 }
-
-enable_diagnostics = true
-# diagnostics_settings_name = ""
 
 postgresql_configurations = {
   "TimeZone" = "EST",
