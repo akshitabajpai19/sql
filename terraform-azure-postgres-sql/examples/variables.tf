@@ -14,7 +14,7 @@ variable "posgresql_server_name" {
   type = string
 }
 
-variable "postgre_sql_timeouts" {
+variable "timeouts" {
   type = object({
     create = string
     update = string

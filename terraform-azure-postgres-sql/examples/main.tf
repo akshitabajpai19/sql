@@ -21,6 +21,7 @@ module "postgre-deploy" {
   auto_grow_enabled                 = var.auto_grow_enabled
   posgresql_version                 = var.posgresql_version
   replication_role                  = var.replication_role
+  timeouts                          = var.timeouts
   posgresql_zone                    = var.posgresql_zone
   kv_secret_content_type            = var.kv_secret_content_type
   kv_secret_expiration_date         = var.kv_secret_expiration_date

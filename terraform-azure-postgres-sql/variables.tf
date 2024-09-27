@@ -14,12 +14,12 @@ variable "posgresql_server_name" {
   type = string
 }
 
-variable "postgre_sql_timeouts" {
+variable "timeouts" {
   type = object({
-    create = string 
-    update = string 
-    read   = string 
-    delete = string 
+    create = string
+    update = string
+    read   = string
+    delete = string
   })
   description = "Map that holds the Service Bus configuration"
   default     = null
