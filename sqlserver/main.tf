@@ -1,9 +1,3 @@
-data "azurerm_resource_group" "this" {
-  for_each = var.sql_servers
-  name     = each.value.resource_group_name
-}
-
-
 # Generate random password
 resource "random_password" "this" {
   length           = 32
@@ -15,10 +9,6 @@ resource "random_password" "this" {
   override_special = "!@$%*()-_=+[]{}:?"
 }
 
-# -
-# - Get the current user config
-# -
-data "azurerm_client_config" "current" {}
 
 # - Azure SQL Server
 # -
