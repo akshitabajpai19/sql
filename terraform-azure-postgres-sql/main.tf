@@ -64,10 +64,10 @@ resource "azurerm_postgresql_flexible_server" "posgresflexible" {
   tags                              = var.tags
 
   timeouts {
-    create = lookup(var.timeouts, "create")
-    update = lookup(var.timeouts, "update")
-    read   = lookup(var.timeouts, "read")
-    delete = lookup(var.timeouts, "delete")
+    create = lookup(var.timeouts, "create", null)
+    update = lookup(var.timeouts, "update", null)
+    read   = lookup(var.timeouts, "read", null)
+    delete = lookup(var.timeouts, "delete", null)
   }
 
   dynamic "authentication" {
