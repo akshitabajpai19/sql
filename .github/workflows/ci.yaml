@@ -25,21 +25,22 @@ jobs:
           terraform_version: 1.5.0  # Use your required version
  
       # Set up TFLint
-#      - name: Set up TFLint
-#        uses: terraform-linters/setup-tflint@v1
+      - name: Set up TFLint
+        uses: terraform-linters/setup-tflint@v1
  
       # Initialize TFLint (downloads required plugin rules)
-#      - name: Initialize TFLint
-#        shell: bash
-#        run: tflint --init
+      - name: Initialize TFLint
+        shell: bash
+        run: tflint --init
  
       # Run TFLint to lint Terraform code
-#      - name: Run TFLint
-#        shell: bash
-#        run: tflint
+      - name: Run TFLint
+        shell: bash
+        run: tflint
  
 #      - name: Run TFLint
-#        run: tflint -f compact --recursive
+        #run: tflint -f compact --recursive
+        run: tflint --chdir="./sqlserver"
       # Run TFsec to check for security vulnerabilities in Terraform code
       - name: Run TFsec for main directory
         uses: aquasecurity/tfsec-action@v1.0.3
