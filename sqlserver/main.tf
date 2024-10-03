@@ -128,4 +128,3 @@ module "private-endpoint-setup" {
   additionalcontext              = each.value.additionalcontext
   depends_on                     = [azurerm_mssql_server.this]
 }
-}}}}
