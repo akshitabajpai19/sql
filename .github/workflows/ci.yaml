@@ -40,7 +40,7 @@ jobs:
  
       - name: Run TFLint
         #run: tflint -f compact --recursive
-        run: tflint --chdir="./sqlserver123"
+        run: tflint --chdir="./sqlserver"
       # Run TFsec to check for security vulnerabilities in Terraform code
       - name: Run TFsec for main directory
         uses: aquasecurity/tfsec-action@v1.0.3
