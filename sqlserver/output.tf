@@ -21,4 +21,3 @@ output "azuresql_versions" {
   description = "Versions of the Azure SQL servers"
   value       = { for k, v in azurerm_mssql_server.this : k => v.version }
 }
-
