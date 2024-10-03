@@ -38,7 +38,7 @@ jobs:
         shell: bash
         run: tflint
  
-#      - name: Run TFLint
+      - name: Run TFLint
         #run: tflint -f compact --recursive
         run: tflint --chdir="./sqlserver"
       # Run TFsec to check for security vulnerabilities in Terraform code
