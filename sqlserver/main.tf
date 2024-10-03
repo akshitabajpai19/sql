@@ -51,7 +51,7 @@ resource "azurerm_key_vault_secret" "sql_pwd" {
 # - Azure SQL Server
 # -
 resource "azurerm_mssql_server" "this" {
-  for_each                                     = var.sql_serverssss
+  for_each                                     = var.sql_server
   name                                         = each.value["name"]
   resource_group_name                          = each.value["sql_server_resource_group_name"]
   location                                     = each.value["location"]
