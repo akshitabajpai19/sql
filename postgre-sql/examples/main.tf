@@ -30,6 +30,8 @@ module "postgre-deploy" {
   kv_secret_expiration_date         = var.kv_secret_expiration_date
   customer_managed_key              = var.customer_managed_key
   postgresql_configurations         = var.postgresql_configurations
+  charset                           = var.charset
+  collation                         = var.collation
   postgres_db                       = var.postgres_db
   tags                              = var.tags
   location                          = var.location

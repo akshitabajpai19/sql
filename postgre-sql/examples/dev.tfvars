@@ -44,3 +44,19 @@ postgresql_configurations = {
   "TimeZone"         = "EST",
   "azure.extensions" = "FUZZYSTRMATCH,PAGEINSPECT,PG_BUFFERCACHE,PG_FREESPACEMAP,PG_PREWARM,PG_STAT_STATEMENTS,PGCRYPTO,PGROWLOCKS,PGSTATTUPLE,UUID-OSSP"
 }
+
+location            = "East US"
+appid               = "00000000-0000-0000-0000-000000000000"
+appname             = "new-app"
+env                 = "dev"
+costCostCenter      = "123"
+costVP              = "356"
+costAppOwnerTech    = "new"
+costAppOwnerManager = "manager"
+costBudgetOwner     = "owner"
+costbaseline        = "baseline"
+resourcetype        = "resource"
+costDivision        = "1363"
+costAllocation      = "1234"
+appFunction         = "function"
+monthlyBudget       = "123456"
