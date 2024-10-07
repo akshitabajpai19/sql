@@ -15,6 +15,8 @@ module "postgre-deploy" {
   geo_redundant_backup_enabled      = var.geo_redundant_backup_enabled
   posgresql_create_mode             = var.posgresql_create_mode
   posgresql_source_server_id        = var.posgresql_source_server_id
+  public_network_access_enabled     = var.public_network_access_enabled
+  password_auth_enabled             = var.password_auth_enabled
   ad_auth_enabled                   = var.ad_auth_enabled
   point_in_time_restore_time_in_utc = var.point_in_time_restore_time_in_utc
   maintenance_window                = var.maintenance_window
@@ -30,4 +32,19 @@ module "postgre-deploy" {
   postgresql_configurations         = var.postgresql_configurations
   postgres_db                       = var.postgres_db
   tags                              = var.tags
+  location                          = var.location
+  appid                             = var.appid
+  appname                           = var.appname
+  env                               = var.env
+  costCostCenter                    = var.costCostCenter
+  costVP                            = var.costVP
+  costAppOwnerTech                  = var.costAppOwnerTech
+  costAppOwnerManager               = var.costAppOwnerManager
+  costBudgetOwner                   = var.costBudgetOwner
+  costbaseline                      = var.costbaseline
+  resourcetype                      = var.resourcetype
+  costDivision                      = var.costDivision
+  costAllocation                    = var.costAllocation
+  appFunction                       = var.appFunction
+  monthlyBudget                     = var.monthlyBudget
 }
