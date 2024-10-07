@@ -3,12 +3,12 @@ key_vault_name      = "newkey123"
 key_vault_rg_name   = "testing-rg-postgre"
 user_assigned_identity_ids = {
   user01 = {
-    identity_id = "/subscriptions/8c5a7b36-81fd-4f19-a1f4-9cdb2a790f8e/resourceGroups/testing-rg-postgre/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-latest"
+    identity_id = "/subscriptions/XXXXXXXXXXXXXXXXXXXXX/resourceGroups/testing-rg-postgre/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-latest"
   }
 }
 posgresql_server_name  = "akshita-test01"
-delegated_subnet_id    = "/subscriptions/8c5a7b36-81fd-4f19-a1f4-9cdb2a790f8e/resourceGroups/testing-rg-postgre/providers/Microsoft.Network/virtualNetworks/new-vnet/subnets/new"
-private_dns_zone_id    = "/subscriptions/8c5a7b36-81fd-4f19-a1f4-9cdb2a790f8e/resourceGroups/testing-rg-postgre/providers/Microsoft.Network/privateDnsZones/vkey.postgres.database.azure.com"
+delegated_subnet_id    = "/subscriptions/XXXXXXXXXXXXXXXXXXXXX/resourceGroups/testing-rg-postgre/providers/Microsoft.Network/virtualNetworks/new-vnet/subnets/new"
+private_dns_zone_id    = "/subscriptions/XXXXXXXXXXXXXXXXXXXXX/resourceGroups/testing-rg-postgre/providers/Microsoft.Network/privateDnsZones/vkey.postgres.database.azure.com"
 postgres_admin         = "sqladmin"
 posgresql_sku_name     = "GP_Standard_D2s_v3"
 posgresql_storage_mb   = 65536
@@ -22,8 +22,8 @@ timeouts = {
 }
 customer_managed_key = {
   c01 = {
-    key_vault_key_id                  = "https://newkey123.vault.azure.net/keys/kv-key-postgre/bf2d8ba5e03348c7ae8841268ddc3ba1"
-    primary_user_assigned_identity_id = "/subscriptions/8c5a7b36-81fd-4f19-a1f4-9cdb2a790f8e/resourceGroups/testing-rg-postgre/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-latest"
+    key_vault_key_id                  = "https://newkey123.vault.azure.net/keys/kv-key-postgre/XXXXXXXXXXXXXXXXXXXXX"
+    primary_user_assigned_identity_id = "/subscriptions/XXXXXXXXXXXXXXXXXXXXXX/resourceGroups/testing-rg-postgre/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-latest"
 
   }
 }
