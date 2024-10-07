@@ -1,5 +1,4 @@
 locals {
-  subscription_id = var.subscription_id != null ? var.subscription_id : data.azurerm_client_config.current.subscription_id
   mandatory_tags = tomap({
     appid               = var.appid
     appname             = var.appname

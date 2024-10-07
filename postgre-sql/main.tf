@@ -135,8 +135,8 @@ resource "azurerm_postgresql_flexible_server_configuration" "postgresql_flexible
 resource "azurerm_postgresql_flexible_server_database" "this" {
   name      = var.postgres_db
   server_id = azurerm_postgresql_flexible_server.posgresflexible.id
-  collation = "en_US.utf8"
-  charset   = "utf8"
+  collation = var.collation
+  charset   = var.charset
 
   # prevent the possibility of accidental data loss
   lifecycle {

@@ -4,12 +4,6 @@ variable "postgres_admin" {
   default     = null
 }
 
-variable "postgres_admin_password" {
-  description = "PostgreSQL administrator password."
-  type        = string
-  default     = null
-}
-
 variable "geo_redundant_backup_enabled" {
   description = "Is Geo-Redundant backup enabled on the PostgreSQL Flexible Server."
   type        = bool
@@ -310,4 +304,16 @@ variable "costbaseline" {
   description = "year resource created"
   type        = string
   default     = ""
+}
+
+variable "charset" {
+  description = "Specifies the Charset for the Azure PostgreSQL Flexible Server Database"
+  type = string
+  default = "UTF8"
+}
+
+variable "collation" {
+  description = "Specifies the Collation for the Azure PostgreSQL Flexible Server Database"
+  type = string
+  default = "en_US.utf8"  
 }
