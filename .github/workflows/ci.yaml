@@ -40,15 +40,15 @@ jobs:
  
       - name: Run TFLint
         #run: tflint -f compact --recursive
-        run: tflint --chdir="./postgre-sql"
+        run: tflint --chdir="./postgre-sql/examples"
       # Run TFsec to check for security vulnerabilities in Terraform code
       - name: Run TFsec for main directory
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          working-directory: ./postgre-sql  # Adjust this path if needed
+          working-directory: ./postgre-sql/examples  # Adjust this path if needed
  
       # Run TFsec for terraform-modules (optional, based on your folder structure)
       - name: Run TFsec for terraform-modules
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          working-directory: ./postgre-sql  # Adjust path to the module folder
+          working-directory: ./postgre-sql/examples  # Adjust path to the module folder
