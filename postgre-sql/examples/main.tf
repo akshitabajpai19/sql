@@ -1,7 +1,6 @@
 module "postgre-deploy" {
-  source              = "../"
-  resource_group_name = var.resource_group_name
-
+  source                            = "../"
+  resource_group_name               = var.resource_group_name
   key_vault_name                    = var.key_vault_name
   key_vault_rg_name                 = var.key_vault_rg_name
   user_assigned_identity_ids        = var.user_assigned_identity_ids
@@ -11,12 +10,14 @@ module "postgre-deploy" {
   postgres_admin                    = var.postgres_admin
   posgresql_sku_name                = var.posgresql_sku_name
   posgresql_storage_mb              = var.posgresql_storage_mb
+  posgresql_storage_tier            = var.posgresql_storage_tier
   backup_retention_days             = var.backup_retention_days
   geo_redundant_backup_enabled      = var.geo_redundant_backup_enabled
   posgresql_create_mode             = var.posgresql_create_mode
   posgresql_source_server_id        = var.posgresql_source_server_id
   ad_auth_enabled                   = var.ad_auth_enabled
   point_in_time_restore_time_in_utc = var.point_in_time_restore_time_in_utc
+  maintenance_window                = var.maintenance_window
   high_availability                 = var.high_availability
   auto_grow_enabled                 = var.auto_grow_enabled
   posgresql_version                 = var.posgresql_version

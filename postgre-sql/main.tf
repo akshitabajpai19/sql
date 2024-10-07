@@ -53,27 +53,33 @@ resource "azurerm_postgresql_flexible_server" "posgresflexible" {
   sku_name                          = var.posgresql_sku_name
   version                           = var.posgresql_version
   storage_mb                        = var.posgresql_storage_mb
+  storage_tier                      = var.posgresql_storage_tier
   backup_retention_days             = var.backup_retention_days
   point_in_time_restore_time_in_utc = var.point_in_time_restore_time_in_utc
   replication_role                  = var.replication_role
   auto_grow_enabled                 = var.auto_grow_enabled
   geo_redundant_backup_enabled      = var.geo_redundant_backup_enabled
   create_mode                       = var.posgresql_create_mode
+  public_network_access_enabled     = var.public_network_access_enabled
   source_server_id                  = var.posgresql_source_server_id
   zone                              = var.posgresql_zone
-  tags                              = var.tags
+  tags                              = local.tags
 
-  timeouts {
-    create = lookup(var.timeouts, "create", null)
-    update = lookup(var.timeouts, "update", null)
-    read   = lookup(var.timeouts, "read", null)
-    delete = lookup(var.timeouts, "delete", null)
+  dynamic "timeouts" {
+    for_each = var.timeouts != null ? { this = var.timeouts } : {}
+    content {
+      create = timeouts.value.create
+      update = timeouts.value.update
+      read   = timeouts.value.read
+      delete = timeouts.value.delete
+    }
   }
 
   dynamic "authentication" {
-    for_each = var.ad_auth_enabled != null ? { this = var.ad_auth_enabled } : {}
+    for_each = var.ad_auth_enabled || var.password_auth_enabled ? { this = true } : {}
     content {
       active_directory_auth_enabled = var.ad_auth_enabled
+      password_auth_enabled         = var.password_auth_enabled
       tenant_id                     = data.azurerm_client_config.current.tenant_id
     }
   }
@@ -89,15 +95,27 @@ resource "azurerm_postgresql_flexible_server" "posgresflexible" {
   dynamic "customer_managed_key" {
     for_each = var.customer_managed_key != null ? var.customer_managed_key : {}
     content {
-      key_vault_key_id                  = customer_managed_key.value.key_vault_key_id
-      primary_user_assigned_identity_id = customer_managed_key.value.primary_user_assigned_identity_id
+      key_vault_key_id                     = customer_managed_key.value.key_vault_key_id
+      primary_user_assigned_identity_id    = customer_managed_key.value.primary_user_assigned_identity_id
+      geo_backup_key_vault_key_id          = customer_managed_key.value.geo_backup_key_vault_key_id
+      geo_backup_user_assigned_identity_id = customer_managed_key.value.geo_backup_user_assigned_identity_id
+    }
+  }
+
+  dynamic "maintenance_window" {
+    for_each = var.maintenance_window != null ? var.maintenance_window : {}
+    content {
+      day_of_week  = maintenance_window.value.day_of_week
+      start_hour   = maintenance_window.value.start_hour
+      start_minute = maintenance_window.value.start_minute
     }
   }
 
   dynamic "high_availability" {
     for_each = var.high_availability != null ? var.high_availability : {}
     content {
-      mode = high_availability.value.high_availability_mode
+      mode                      = high_availability.value.high_availability_mode
+      standby_availability_zone = high_availability.value.standby_availability_zone
     }
   }
 
@@ -106,6 +124,7 @@ resource "azurerm_postgresql_flexible_server" "posgresflexible" {
   }
 }
 
+
 resource "azurerm_postgresql_flexible_server_configuration" "postgresql_flexible_config" {
   for_each  = var.postgresql_configurations
   name      = each.key
@@ -113,7 +132,7 @@ resource "azurerm_postgresql_flexible_server_configuration" "postgresql_flexible
   value     = each.value
 }
 
-resource "azurerm_postgresql_flexible_server_database" "example" {
+resource "azurerm_postgresql_flexible_server_database" "this" {
   name      = var.postgres_db
   server_id = azurerm_postgresql_flexible_server.posgresflexible.id
   collation = "en_US.utf8"

@@ -1,9 +1,10 @@
+# tflint-ignore: terraform_required_providers
 terraform {
   required_version = "~> 1.8"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = ">= 3.71.0, <= 3.87.0"
+      version = ">= 4.3.0"
     }
     random = {
       source  = "hashicorp/random"
@@ -18,5 +19,5 @@ provider "azurerm" {
       prevent_deletion_if_contains_resources = false
     }
   }
-  skip_provider_registration = true
+  subscription_id = "8c5a7b36-81fd-4f19-a1f4-9cdb2a790f8e"
 }
