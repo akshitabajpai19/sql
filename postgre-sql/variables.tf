@@ -210,12 +210,6 @@ variable "postgres_db" {
 
 }
 
-variable "subscription_id" {
-  description = "The subscription ID to use."
-  type        = string
-  default     = null
-}
-
 variable "location" {
   description = "The Azure region where resources will be deployed"
   type        = string

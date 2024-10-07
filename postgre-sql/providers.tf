@@ -19,3 +19,11 @@ terraform {
   }
 }
 
+provider "azurerm" {
+  features {
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
+  subscription_id = "8c5a7b36-81fd-4f19-a1f4-9cdb2a790f8e"
+}
