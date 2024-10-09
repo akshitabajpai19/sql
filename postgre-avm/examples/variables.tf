@@ -8,18 +8,6 @@ variable "key_vault_rg_name" {
   description = "Resource group name for key vault"
 }
 
-variable "kv_secret_content_type" {
-  description = "(Optional) Specifies the content type for the Key Vault Secret."
-  default     = null
-  type        = string
-}
-
-variable "kv_secret_expiration_date" {
-  description = "(Optional) Expiration UTC datetime (Y-m-d'T'H:M:S'Z')."
-  default     = null
-  type        = string
-}
-
 variable "location" {
   type        = string
   description = "Azure region where the resource should be deployed."
