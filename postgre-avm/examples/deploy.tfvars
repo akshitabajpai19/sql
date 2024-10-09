@@ -4,7 +4,7 @@ key_vault_name      = "kv-postgresql22"
 key_vault_rg_name   = "post-rg"
 managed_identities = {
   system_assigned            = false
-  user_assigned_resource_ids = ["/subscriptions/8c5a7b36-81fd-4f19-a1f4-9cdb2a790f8e/resourceGroups/post-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/new-mi"]
+  user_assigned_resource_ids = ["/subscriptions/XXXXXXXXXXXXXXXX/resourceGroups/post-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/new-mi"]
 }
 
 posgresql_server_name = "akshita-test01"
