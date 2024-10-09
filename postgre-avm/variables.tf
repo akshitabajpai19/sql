@@ -254,13 +254,6 @@ variable "administrator_login" {
   description = "(Optional) The Administrator login for the PostgreSQL Flexible Server. Required when `create_mode` is `Default` and `authentication.password_auth_enabled` is `true`."
 }
 
-variable "administrator_password" {
-  type        = string
-  default     = null
-  description = "(Optional) The Password associated with the `administrator_login` for the PostgreSQL Flexible Server. Required when `create_mode` is `Default` and `authentication.password_auth_enabled` is `true`."
-  sensitive   = true
-}
-
 variable "authentication" {
   type = object({
     active_directory_auth_enabled = optional(bool)
