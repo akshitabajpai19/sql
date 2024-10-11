@@ -223,13 +223,6 @@ variable "administrator_login" {
   description = "(Optional) The administrator login name for the new server. Required unless `azuread_authentication_only` in the `azuread_administrator` block is `true`. When omitted, Azure will generate a default username which cannot be subsequently changed. Changing this forces a new resource to be created."
 }
 
-variable "administrator_login_password" {
-  type        = string
-  default     = null
-  description = "(Optional) The password associated with the `administrator_login` user. Needs to comply with Azure's [Password Policy](https://msdn.microsoft.com/library/ms161959.aspx). Required unless `azuread_authentication_only` in the `azuread_administrator` block is `true`."
-  sensitive   = true
-}
-
 variable "connection_policy" {
   type        = string
   default     = null

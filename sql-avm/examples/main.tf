@@ -22,6 +22,7 @@ module "sqlserver" {
   public_network_access_enabled                = var.public_network_access_enabled
   role_assignments                             = var.role_assignments
   transparent_data_encryption_key_vault_key_id = var.transparent_data_encryption_key_vault_key_id
+  tags                                         = var.tags
   resourcetype                                 = var.resourcetype
   appid                                        = var.appid
   appname                                      = var.appname
