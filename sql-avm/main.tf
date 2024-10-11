@@ -1,11 +1,3 @@
-data "azurerm_resource_group" "parent" {
-  count = var.location == null ? 1 : 0
-
-  name = var.resource_group_name
-}
-
-data "azurerm_client_config" "current" {}
-
 data "azurerm_key_vault" "kv" {
   name                = var.key_vault_name
   resource_group_name = var.key_vault_rg_name
