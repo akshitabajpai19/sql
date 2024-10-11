@@ -4,6 +4,18 @@ variable "location" {
   nullable    = false
 }
 
+variable "kv_secret_content_type" {
+  description = "(Optional) Specifies the content type for the Key Vault Secret."
+  default     = null
+  type        = string
+}
+
+variable "kv_secret_expiration_date" {
+  description = "(Optional) Expiration UTC datetime (Y-m-d'T'H:M:S'Z')."
+  default     = null
+  type        = string
+}
+
 # This is required for most resource modules
 variable "resource_group_name" {
   type        = string
@@ -221,6 +233,13 @@ variable "administrator_login" {
   type        = string
   default     = null
   description = "(Optional) The administrator login name for the new server. Required unless `azuread_authentication_only` in the `azuread_administrator` block is `true`. When omitted, Azure will generate a default username which cannot be subsequently changed. Changing this forces a new resource to be created."
+}
+
+variable "administrator_login_password" {
+  type        = string
+  default     = null
+  description = "(Optional) The password associated with the `administrator_login` user. Needs to comply with Azure's [Password Policy](https://msdn.microsoft.com/library/ms161959.aspx). Required unless `azuread_authentication_only` in the `azuread_administrator` block is `true`."
+  sensitive   = true
 }
 
 variable "connection_policy" {

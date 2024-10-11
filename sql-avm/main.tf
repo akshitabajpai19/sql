@@ -24,9 +24,11 @@ resource "random_password" "administrator_password" {
 }
 
 resource "azurerm_key_vault_secret" "this" {
-  name         = "${var.name}-password"
-  value        = random_password.administrator_password.result
-  key_vault_id = data.azurerm_key_vault.kv.id
+  name            = "${var.name}-password"
+  value           = random_password.administrator_password.result
+  key_vault_id    = data.azurerm_key_vault.kv.id
+  content_type    = "Azure USER PASS secret"
+  expiration_date = timeadd(timestamp(), "8760h")
 }
 
 module "avm-res-sql-server" {

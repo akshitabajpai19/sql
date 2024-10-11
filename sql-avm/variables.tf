@@ -4,6 +4,18 @@ variable "location" {
   nullable    = false
 }
 
+variable "kv_secret_content_type" {
+  description = "(Optional) Specifies the content type for the Key Vault Secret."
+  default     = null
+  type        = string
+}
+
+variable "kv_secret_expiration_date" {
+  description = "(Optional) Expiration UTC datetime (Y-m-d'T'H:M:S'Z')."
+  default     = null
+  type        = string
+}
+
 # This is required for most resource modules
 variable "resource_group_name" {
   type        = string
