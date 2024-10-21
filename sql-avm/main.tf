@@ -3,6 +3,11 @@ data "azurerm_key_vault" "kv" {
   resource_group_name = var.key_vault_rg_name
 }
 
+data "azurerm_storage_account" "storage" {
+  name                = var.storage_account_name
+  resource_group_name = var.storage_account_rg
+}
+
 resource "random_password" "administrator_password" {
   length           = 12
   lower            = true
@@ -48,4 +53,12 @@ module "avm-res-sql-server" {
   role_assignments                             = var.role_assignments
   tags                                         = local.tags
   transparent_data_encryption_key_vault_key_id = var.transparent_data_encryption_key_vault_key_id
+}
+
+resource "azurerm_mssql_server_extended_auditing_policy" "this" {
+  server_id                               = module.avm-res-sql-server.resource_id
+  storage_endpoint                        = data.azurerm_storage_account.storage.primary_blob_endpoint
+  storage_account_access_key              = data.azurerm_storage_account.storage.primary_access_key
+  storage_account_access_key_is_secondary = var.storage_account_access_key_is_secondary
+  retention_in_days                       = var.retention_in_days
 }

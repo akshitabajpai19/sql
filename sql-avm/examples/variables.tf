@@ -693,3 +693,27 @@ variable "costbaseline" {
   type        = string
   default     = ""
 }
+
+variable "storage_account_name" {
+  description = "name of the storage account for auditing"
+  type        = string
+  default     = null
+}
+
+variable "storage_account_rg" {
+  description = "name of the resource group for storage account"
+  type        = string
+  default     = null
+}
+
+variable "storage_account_access_key_is_secondary" {
+  description = "Indicates if the storage account access key is secondary"
+  type        = bool
+  default     = false
+}
+
+variable "retention_in_days" {
+  description = "Number of days to retain the audit logs"
+  type        = number
+  default     = 6
+}

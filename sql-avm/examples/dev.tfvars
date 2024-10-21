@@ -4,16 +4,18 @@ server_version      = "12.0"
 location            = "Central US"
 resource_group_name = "post-rg"
 administrator_login = "sqladmin"
+storage_account_name = "newstorageaccount1916"
+storage_account_rg = "post-rg"
 databases = {
   db01 = {
     name     = "new-db"
     sku_name = "Basic"
   }
 }
-name = "new-sql-db"
+name = "akshita-sql-test"
 private_endpoints = {
   "pe01" = {
-    subnet_resource_id = "/subscriptions/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/resourceGroups/post-rg/providers/Microsoft.Network/virtualNetworks/vm-test-vnet/subnets/test"
+    subnet_resource_id = "/subscriptions/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/resourceGroups/post-rg/providers/Microsoft.Network/virtualNetworks/vm-test-vnet/subnets/new"
 
   }
 }

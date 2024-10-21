@@ -37,4 +37,8 @@ module "sqlserver" {
   costbaseline                                 = var.costbaseline
   costCostCenter                               = var.costCostCenter
   costVP                                       = var.costVP
+  storage_account_name                         = var.storage_account_name
+  storage_account_rg                           = var.storage_account_rg
+  storage_account_access_key_is_secondary      = var.storage_account_access_key_is_secondary
+  retention_in_days                            = var.retention_in_days
 }
