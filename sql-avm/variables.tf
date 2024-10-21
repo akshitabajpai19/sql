@@ -715,5 +715,5 @@ variable "storage_account_access_key_is_secondary" {
 variable "retention_in_days" {
   description = "Number of days to retain the audit logs"
   type        = number
-  default     = 6
+  default     = 90
 }
