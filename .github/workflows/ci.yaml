@@ -45,10 +45,10 @@ jobs:
       - name: Run TFsec for main directory
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          working-directory: ./role_definition  # Adjust this path if needed
+          working_directory: ./role_definition  # Adjust this path if needed
  
       # Run TFsec for terraform-modules (optional, based on your folder structure)
       - name: Run TFsec for terraform-modules
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          working-directory: ./role_definition  # Adjust path to the module folder.
+          working_directory: ./role_definition  # Adjust path to the module folder.
