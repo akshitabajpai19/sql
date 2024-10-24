@@ -1,22 +1,29 @@
 cosmosdb = {
   c01 = {
-    location                                = "westeurope"
-    resource_group_name                     = "new-rg"
-    enable_telemetry                        = true
-    access_key_metadata_writes_enabled      = true
-    analytical_storage_config               = null
-    analytical_storage_enabled              = false
-    automatic_failover_enabled              = true
-    backup                                  = {}
-    capabilities                            = []
-    capacity                                = {}
-    consistency_policy                      = {}
-    cors_rule                               = null
-    customer_managed_key                    = null
-    diagnostic_settings                     = {}
-    enable_telemetry                        = true
-    free_tier_enabled                       = false
-    geo_locations                           = null
+    location                           = "centralus"
+    resource_group_name                = "new-rg"
+    db_type                            = null
+    enable_telemetry                   = true
+    access_key_metadata_writes_enabled = true
+    analytical_storage_config          = null
+    analytical_storage_enabled         = false
+    automatic_failover_enabled         = false
+    backup                             = {}
+    capabilities                       = []
+    capacity                           = {}
+    consistency_policy                 = {}
+    cors_rule                          = null
+    customer_managed_key               = null
+    diagnostic_settings                = {}
+    enable_telemetry                   = true
+    free_tier_enabled                  = false
+    geo_locations = [
+      {
+        location          = "centralus"
+        failover_priority = 0
+        zone_redundant    = false
+      }
+    ]
     ip_range_filter                         = []
     local_authentication_disabled           = false
     lock                                    = null
@@ -47,8 +54,8 @@ cosmosdb_pgsql = {
   pg01 = {
     name                                 = "post-cosmos"
     resource_group_name                  = "new-rg"
-    location                             = "westeurope"
-    node_count                           = 3
+    location                             = "eastus"
+    node_count                           = 2
     citus_version                        = "10.0"
     coordinator_public_ip_access_enabled = true
     coordinator_server_edition           = "GeneralPurpose"
@@ -59,7 +66,7 @@ cosmosdb_pgsql = {
     node_server_edition                  = "MemoryOptimized"
     node_storage_quota_in_mb             = 524288
     cosmos_key                           = "c01"
-    node_vcores                          = 8
+    node_vcores                          = 2
     point_in_time_in_utc                 = null
     preferred_primary_zone               = "1"
     shards_on_coordinator_enabled        = false
@@ -84,6 +91,7 @@ cosmosdb_pgsql = {
   }
 
 }
+db_type             = null
 key_vault_name      = "key0019"
 key_vault_rg_name   = "new-rg"
 location            = "westeurope"

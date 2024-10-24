@@ -3,6 +3,7 @@ module "cosmos" {
   source              = "../"
   cosmosdb            = var.cosmosdb
   cosmosdb_pgsql      = var.cosmosdb_pgsql
+  db_type             = var.db_type
   key_vault_name      = var.key_vault_name
   key_vault_rg_name   = var.key_vault_rg_name
   appid               = var.appid

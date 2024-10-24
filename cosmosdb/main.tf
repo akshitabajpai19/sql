@@ -20,6 +20,9 @@ locals {
     provisioned_by      = "Terraform"
     provisioned_date    = timestamp()
   }
+  filtered_cosmosdb = {
+    for k, v in var.cosmosdb : k => v if v.db_type != "PostgreSQL"
+  }
 
 }
 
@@ -65,7 +68,7 @@ module "avm-res-documentdb-databaseaccount" {
   source  = "Azure/avm-res-documentdb-databaseaccount/azurerm"
   version = "0.4.0"
 
-  for_each = var.cosmosdb
+  for_each = local.filtered_cosmosdb
 
   location            = each.value.location
   name                = local.naming
@@ -107,15 +110,8 @@ module "avm-res-documentdb-databaseaccount" {
   virtual_network_rules                   = try(each.value.virtual_network_rules) != null ? each.value.virtual_network_rules : []
 }
 
-data "azurerm_cosmosdb_account" "this" {
-  for_each            = var.cosmosdb
-  name                = each.value.name
-  resource_group_name = each.value.resource_group_name
-  depends_on          = [module.avm-res-documentdb-databaseaccount]
-}
-
 resource "azurerm_cosmosdb_postgresql_cluster" "cosmosdb_pgsql" {
-  for_each                        = var.cosmosdb_pgsql
+  for_each                        = { for k, v in var.cosmosdb_pgsql : k => v if var.db_type == "PostgreSQL" }
   name                            = each.value["name"]
   resource_group_name             = each.value["resource_group_name"]
   location                        = each.value["location"]
@@ -132,8 +128,8 @@ resource "azurerm_cosmosdb_postgresql_cluster" "cosmosdb_pgsql" {
   point_in_time_in_utc            = each.value["point_in_time_in_utc"]
   preferred_primary_zone          = each.value["preferred_primary_zone"]
   shards_on_coordinator_enabled   = each.value["shards_on_coordinator_enabled"]
-  source_location                 = lookup(data.azurerm_cosmosdb_account.this, each.value["cosmos_key"], null)["location"]
-  source_resource_id              = lookup(data.azurerm_cosmosdb_account.this, each.value["cosmos_key"], null)["id"]
+  source_location                 = each.value.source_location
+  source_resource_id              = each.value.source_resource_id
   sql_version                     = each.value["sql_version"]
   tags                            = each.value["tags"]
   dynamic "maintenance_window" {

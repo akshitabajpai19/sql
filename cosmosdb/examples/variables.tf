@@ -26,6 +26,7 @@ variable "cosmosdb" {
     location            = string
     name                = optional(string)
     resource_group_name = string
+    db_type             = string
     enable_telemetry    = optional(bool, true)
     tags                = optional(map(string), {})
     role_assignments = optional(map(object({
@@ -284,7 +285,6 @@ variable "cosmosdb_pgsql" {
     point_in_time_in_utc                 = optional(string, null)
     preferred_primary_zone               = optional(string, null)
     shards_on_coordinator_enabled        = optional(bool, false)
-    cosmos_key = optional(string)
     source_location                      = optional(string, null)
     source_resource_id                   = optional(string, null)
     sql_version                          = optional(number, null)
@@ -302,6 +302,12 @@ variable "cosmosdb_pgsql" {
     }), {})
   }))
 
+}
+
+variable "db_type" {
+  description = "The type of database to create (SQL, MongoDB, Cassandra, PostgreSQL)"
+  type        = string
+  default     = null
 }
 
 variable "appid" {
