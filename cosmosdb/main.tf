@@ -60,8 +60,8 @@ resource "azurerm_key_vault_secret" "this" {
   name            = "${replace(each.value.name, "/[^a-zA-Z0-9-]/", "")}-password"
   value           = random_password.administrator_password[each.key].result
   key_vault_id    = data.azurerm_key_vault.kv.id
-  content_type    = var.kv_secret_content_type
-  expiration_date = var.kv_secret_expiration_date
+  content_type    = "PostgreSQL password"
+  expiration_date = timeadd(timestamp(), "8760h")
 }
 
 module "avm-res-documentdb-databaseaccount" {
