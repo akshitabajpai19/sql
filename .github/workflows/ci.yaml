@@ -40,15 +40,15 @@ jobs:
  
       - name: Run TFLint
         #run: tflint -f compact --recursive
-        run: tflint --chdir="./dns-resolver/examples"
+        run: tflint --chdir="./dns-resolver"
       # Run TFsec to check for security vulnerabilities in Terraform code
       - name: Run TFsec for main directory
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          working_directory: ./dns-resolver/examples  # Adjust this path if needed
+          working_directory: ./dns-resolver  # Adjust this path if needed
  
       # Run TFsec for terraform-modules (optional, based on your folder structure)
       - name: Run TFsec for terraform-modules
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          working_directory: ./dns-resolver/examples  # Adjust path to the module folder.
+          working_directory: ./dns-resolver  # Adjust path to the module folder.
