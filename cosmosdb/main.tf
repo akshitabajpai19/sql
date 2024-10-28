@@ -20,6 +20,10 @@ locals {
     provisioned_by      = "Terraform"
     provisioned_date    = timestamp()
   }
+
+  tags = {
+    for key, value in var.cosmosdb_pgsql : key => merge(value.tags, local.mandatory_tags)
+  }
   filtered_cosmosdb = {
     for k, v in var.cosmosdb : k => v if v.db_type != "PostgreSQL"
   }
@@ -131,7 +135,7 @@ resource "azurerm_cosmosdb_postgresql_cluster" "cosmosdb_pgsql" {
   source_location                 = each.value.source_location
   source_resource_id              = each.value.source_resource_id
   sql_version                     = each.value["sql_version"]
-  tags                            = each.value["tags"]
+  tags                            = local.tags[each.key]
   dynamic "maintenance_window" {
     for_each = each.value.maintenance_window != null ? [each.value.maintenance_window] : []
 
