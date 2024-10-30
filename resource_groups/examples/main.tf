@@ -1,13 +1,13 @@
 # Resource groups
 
 module "resourcegroup" {
-  source              = "../resource-groups"
+  source              = "../"
   name                = var.name
   location            = var.location
   enable_telemetry    = var.enable_telemetry
   lock                = var.lock
   role_assignments    = var.role_assignments
-  appid               = var.appid
+  app_id              = var.app_id
   appname             = var.appname
   env                 = var.env
   costCostCenter      = var.costCostCenter
