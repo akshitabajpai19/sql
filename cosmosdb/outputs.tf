@@ -65,3 +65,15 @@ output "sql_dedicated_gateway" {
   description = "The IDs of the SQL dedicated gateways created."
   value       = { for k, v in module.avm-res-documentdb-databaseaccount : k => v.sql_dedicated_gateway }
 }
+
+output "cosmos_pgsql_id" {
+  description = "The IDs of the PostgreSQL clusters created."
+  value       = { for k, v in azurerm_cosmosdb_postgresql_cluster.cosmosdb_pgsql : k => v.id }
+}
+
+output "pgsql_servers" {
+  description = "The FQDN and name of the servers."
+  value = {
+    for k, v in azurerm_cosmosdb_postgresql_cluster.cosmosdb_pgsql : k => v.servers
+  }
+}

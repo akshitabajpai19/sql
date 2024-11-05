@@ -91,7 +91,7 @@ cosmosdb_pgsql = {
   }
 
 }
-db_type             = null
+db_type             = "PostgreSQL"
 key_vault_name      = "key0019"
 key_vault_rg_name   = "new-rg"
 location            = "westeurope"

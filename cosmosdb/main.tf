@@ -136,6 +136,7 @@ resource "azurerm_cosmosdb_postgresql_cluster" "cosmosdb_pgsql" {
   source_resource_id              = each.value.source_resource_id
   sql_version                     = each.value["sql_version"]
   tags                            = local.tags[each.key]
+
   dynamic "maintenance_window" {
     for_each = each.value.maintenance_window != null ? [each.value.maintenance_window] : []
 
