@@ -41,13 +41,13 @@ output "virtual_network_link_outputs" {
 output "privatednszone" {
   description = "The private dns zone details"
   value = {
-    a_record_outputs   = module.private_dns_zones.a_record_outputs
-    aaaa_record_outputs = module.private_dns_zones.aaaa_record_outputs
-    cname_record_outputs    = module.private_dns_zones.cname_record_outputs
-    mx_record_outputs    = module.private_dns_zones.mx_record_outputs
-    ptr_record_outputs            = module.private_dns_zones.ptr_record_outputs
+    a_record_outputs             = module.private_dns_zones.a_record_outputs
+    aaaa_record_outputs          = module.private_dns_zones.aaaa_record_outputs
+    cname_record_outputs         = module.private_dns_zones.cname_record_outputs
+    mx_record_outputs            = module.private_dns_zones.mx_record_outputs
+    ptr_record_outputs           = module.private_dns_zones.ptr_record_outputs
     srv_record_outputs           = module.private_dns_zones.srv_record_outputs
-    virtual_network_link_outputs                   = module.private_dns_zones.virtual_network_link_outputs
-    txt_record_outputs    = module.private_dns_zones.txt_record_outputs
+    virtual_network_link_outputs = module.private_dns_zones.virtual_network_link_outputs
+    txt_record_outputs           = module.private_dns_zones.txt_record_outputs
   }
 }

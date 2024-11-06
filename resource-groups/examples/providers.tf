@@ -1,22 +1,19 @@
+
 # tflint-ignore: terraform_required_providers
 terraform {
-  required_version = ">= 1.3.0"
+  required_version = "~> 1.8"
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = ">= 3.7.0, < 4.2.0"
+      version = "~> 3.71"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = ">= 3.5.0, < 4.0.0"
+    validation = {
+      source  = "tlkamp/validation"
+      version = "1.1.1"
     }
-    # azapi = {
-    #   source  = "Azure/azapi"
-    #   version = ">= 1.4.0, < 2.0" #"~> 1.13"
-    # }
   }
 }
-
 provider "azurerm" {
   features {
     resource_group {
@@ -25,3 +22,4 @@ provider "azurerm" {
   }
 }
 
+provider "validation" {}

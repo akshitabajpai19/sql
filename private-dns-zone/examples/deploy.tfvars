@@ -7,12 +7,12 @@ costAppOwnerManager = "manager@example.com"
 costAppOwnerTech    = "tech@example.com"
 costBudgetOwner     = "budgetowner@example.com"
 costCostCenter      = "cost-center"
-location          = "your-location"
+location            = "your-location"
 costbaseline        = "2024"
 
 # Required Inputs
-domain_name             = "example004.com"
-resource_group_name     = "your-rg"
+domain_name         = "example004.com"
+resource_group_name = "your-rg"
 
 # Optional Inputs
 a_records = {
@@ -22,7 +22,7 @@ a_records = {
     zone_name           = "example004.com"
     ttl                 = 3600
     records             = ["10.0.0.1"]
-    tags                = {
+    tags = {
       environment = "production"
     }
   }
@@ -37,7 +37,7 @@ cname_records = {
     zone_name           = "example004.com"
     ttl                 = 3600
     record              = "cname.example004.com"
-    tags                = {
+    tags = {
       environment = "production"
     }
   }
@@ -51,13 +51,13 @@ mx_records = {
     resource_group_name = "new-epac"
     zone_name           = "example004.com"
     ttl                 = 3600
-    records             = {
+    records = {
       mail1 = {
         preference = 10
         exchange   = "mail.example004.com"
       }
     }
-    tags                = {
+    tags = {
       environment = "production"
     }
   }
@@ -72,7 +72,7 @@ soa_record = {
   refresh_time = 3600
   retry_time   = 300
   ttl          = 3600
-  tags         = {
+  tags = {
     environment = "production"
   }
 }
@@ -91,7 +91,7 @@ virtual_network_links = {
     vnetlinkname     = "vnet-link-12"
     vnetid           = "/subscriptions/your-sub/resourceGroups/your-rg/providers/Microsoft.Network/virtualNetworks/your-vnet"
     autoregistration = true
-    tags             = {
+    tags = {
       environment = "production"
     }
   }

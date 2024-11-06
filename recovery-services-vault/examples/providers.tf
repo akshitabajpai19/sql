@@ -6,14 +6,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = ">= 3.7.0, < 4.2.0"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = ">= 3.5.0, < 4.0.0"
+    validation = {
+      source  = "tlkamp/validation"
+      version = "1.1.1"
     }
-    # azapi = {
-    #   source  = "Azure/azapi"
-    #   version = ">= 1.4.0, < 2.0" #"~> 1.13"
-    # }
   }
 }
 
@@ -24,4 +20,3 @@ provider "azurerm" {
     }
   }
 }
-
