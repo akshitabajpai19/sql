@@ -1,5 +1,5 @@
 module "vm" {
-  source = "../../"
+  source                                                 = "../../"
   appid                                                  = var.appid
   appname                                                = var.appname
   env                                                    = var.env
@@ -22,13 +22,16 @@ module "vm" {
   vnet_name                                              = var.vnet_name
   vnet_resource_group_name                               = var.vnet_resource_group_name
   virtual_machine_size                                   = var.virtual_machine_size
-  name                                                   = var.name
   kernel_type                                            = var.kernel_type
   source_image_offer                                     = var.source_image_offer
   source_image_publisher                                 = var.source_image_publisher
   source_image_sku                                       = var.source_image_sku
   source_image_version                                   = var.source_image_version
-  key_name                                               = var.key_name
+  recovery_vault_soft_delete_enabled                     = var.recovery_vault_soft_delete_enabled
+  recovery_vault_immutability                            = var.recovery_vault_immutability
+  file_share_backup_policies                             = var.file_share_backup_policies
+  infrastructure_encryption_enabled                      = var.infrastructure_encryption_enabled
+  recovery_vault_cross_region_restore_enabled            = var.recovery_vault_cross_region_restore_enabled
   proximity_placement_group                              = var.proximity_placement_group
   capacity_reservation_group_resource_id                 = var.capacity_reservation_group_resource_id
   extensions                                             = var.extensions
@@ -36,6 +39,8 @@ module "vm" {
   bypass_platform_safety_checks_on_user_schedule_enabled = var.bypass_platform_safety_checks_on_user_schedule_enabled
   recovery_services_vault_name                           = var.recovery_services_vault_name
   recovery_location                                      = var.recovery_location
+  recovery_vault_storage_mode_type                       = var.recovery_vault_storage_mode_type
+  recovery_vault_sku                                     = var.recovery_vault_sku
   recovery_resource_group_name                           = var.recovery_resource_group_name
   recovery_lock                                          = var.recovery_lock
   recovery_rg_role_assignments                           = var.recovery_rg_role_assignments
@@ -109,7 +114,6 @@ module "vm" {
   operating_system_disk_write_accelerator                = var.operating_system_disk_write_accelerator
   priority                                               = var.priority
   public_ip_sku                                          = var.public_ip_sku
-  role_assignments                                       = var.role_assignments
   secure_boot_enabled                                    = var.secure_boot_enabled
   auto_shutdown_time                                     = var.auto_shutdown_time
   auto_shutdown_enabled                                  = var.auto_shutdown_enabled
