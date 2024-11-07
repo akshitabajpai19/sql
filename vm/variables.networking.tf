@@ -218,12 +218,12 @@ NETWORK_INTERFACES
 }
 
 
-variable "public_only" {
-  description = "Create a public only interface?"
-  type        = bool
-  default     = false
+# variable "public_only" {
+#   description = "Create a public only interface?"
+#   type        = bool
+#   default     = false
 
-}
+# }
 
 
 # AVM NSG
