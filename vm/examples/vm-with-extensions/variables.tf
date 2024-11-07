@@ -278,11 +278,11 @@ variable "operating_system_disk_size_gb" {
 }
 
 # Credentials
-variable "admin_username" {
-  description = "Default Username - Random if left blank"
-  type        = string
-  default     = ""
-}
+# variable "admin_username" {
+#   description = "Default Username - Random if left blank"
+#   type        = string
+#   default     = ""
+# }
 
 variable "admin_password" {
   description = "Default Password - Random if left blank. For Linux, need to have disable_password_authentication set to false"

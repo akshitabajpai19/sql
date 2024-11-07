@@ -8,7 +8,7 @@ variable "resource_group_vault_recovery" {
 
 }
 
-variable "recovery_vault_name" {
+variable "recovery_services_vault_name" {
   type        = string
   description = "(Optional) - The name of the recovery services vault if exist"
   default     = ""
