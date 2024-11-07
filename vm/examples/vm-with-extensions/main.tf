@@ -127,4 +127,5 @@ module "vm" {
   auto_shutdown_timezone                                      = var.auto_shutdown_timezone
   ultra_ssd_enabled                                           = var.ultra_ssd_enabled
   plan                                                        = var.plan
+  tags                                                        = var.tags
 }

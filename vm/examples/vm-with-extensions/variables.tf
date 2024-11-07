@@ -1,20 +1,5 @@
 ## Naming and Tags ##
 
-variable "key_name" {
-  type = string
-}
-
-variable "name" {
-  type        = string
-  description = "The name to use when creating the virtual machine."
-  nullable    = false
-
-  validation {
-    condition     = can(regex("^.{1,64}$", var.name))
-    error_message = "virtual machine names for linux must be between 1 and 64 characters in length. Virtual machine name for windows must be between 1 and 20 characters in length."
-  }
-}
-
 variable "location" {
   description = "The Azure region where resources will be deployed"
   type        = string
@@ -107,11 +92,11 @@ variable "storage_analytics_name" {
   default     = null
 }
 
-variable "resource_group_storage_name" {
-  description = "The Storage Account's resurce name. Defaault to deployment resource group"
-  type        = string
-  default     = null
-}
+# variable "resource_group_storage_name" {
+#   description = "The Storage Account's resurce name. Defaault to deployment resource group"
+#   type        = string
+#   default     = null
+# }
 
 # VM Control Variables
 variable "total_machine_count" {
@@ -186,22 +171,24 @@ variable "data_disk_type" {
   }
 }
 
-variable "recovery_sku" {
-  description = "The recovery services vault SKU to use"
-  type        = string
-  default     = "Standard"
-}
+# already present in variables.backup.tf
+# variable "recovery_sku" {
+#   description = "The recovery services vault SKU to use"
+#   type        = string
+#   default     = "Standard"
+# }
 
 variable "resource_group_name" {
   description = "name of the resource group where to place the vm"
   type        = string
 }
 
-variable "vm_admin_pwd_keyvault_secret_name" {
-  description = "keyvault secret name for the vm admin password"
-  type        = string
-  default     = ""
-}
+#commenting as not being used
+# variable "vm_admin_pwd_keyvault_secret_name" {
+#   description = "keyvault secret name for the vm admin password"
+#   type        = string
+#   default     = ""
+# }
 
 # VM Size
 variable "virtual_machine_size" {
@@ -222,11 +209,12 @@ variable "kernel_type" {
 }
 
 # Custom Machine Image
-variable "custom_image_id" {
-  description = "Custom machine image ID"
-  type        = string
-  default     = null
-}
+# commenting as not being used to prevent tflint
+# variable "custom_image_id" {
+#   description = "Custom machine image ID"
+#   type        = string
+#   default     = null
+# }
 
 # Custom User Data
 variable "custom_data" {
@@ -341,11 +329,11 @@ variable "subnet_name" {
   type        = string
 }
 
-variable "accelerated_networking" {
-  description = "Enable accelerated networking?"
-  type        = bool
-  default     = false
-}
+# variable "accelerated_networking" {
+#   description = "Enable accelerated networking?"
+#   type        = bool
+#   default     = false
+# }
 
 variable "ultra_ssd_enabled" {
   description = "Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine."
@@ -365,62 +353,38 @@ variable "nic_nsg" {
   default     = ""
 }
 
-# variable "nsg_rg" {
-#   description = "Resource Group for the NSG"
-#   type        = string
-#   default     = ""
+# coming from locals
+# variable "managed_identities" {
+#   type = object({
+#     system_assigned            = optional(bool, false)
+#     user_assigned_resource_ids = optional(set(string), [])
+#   })
+#   default     = {}
+#   description = <<IDENTITY
+# An object that sets the managed identity configuration for the virtual machine being deployed. Be aware that capabilities such as the Azure Monitor Agent and Role Assignments require that a managed identity has been configured.
+
+# - `system_assigned`            = (Optional) Specifies whether the System Assigned Managed Identity should be enabled.  Defaults to false. 
+# - `user_assigned_resource_ids` = (Optional) Specifies a set of User Assigned Managed Identity IDs to be assigned to this Virtual Machine.
+
+# Example Inputs:
+# ```hcl
+# #default system managed identity
+# managed_identities = {
+#   system_assigned = true
 # }
-
-# VM Identity
-# variable "identity_type" {
-#   description = "The Managed Service Identity Type of this Virtual Machine. Possible values are SystemAssigned (where Azure will generate a Managed Identity for you), UserAssigned (where you can specify the Managed Identities ID)."
-#   type        = string
-#   default     = "SystemAssigned"
-
-#   validation {
-#     condition     = (contains(["systemassigned", "userassigned"], lower(var.identity_type)))
-#     error_message = "The identity type can only be \"UserAssigned\" or \"SystemAssigned\"."
-#   }
+# #user assigned managed identity only
+# managed_identities           = {
+#   user_assigned_resource_ids = ["<azure resource ID of a user assigned managed identity>"]
 # }
-
-# variable "identity_ids" {
-#   description = "Specifies a list of user managed identity ids to be assigned to the VM"
-#   type        = list(string)
-#   default     = []
+# #user assigned and system assigned managed identities
+# managed_identities  = {
+#   system_assigned            = true
+#   user_assigned_resource_ids = ["<azure resource ID of a user assigned managed identity>"]
 # }
-
-
-variable "managed_identities" {
-  type = object({
-    system_assigned            = optional(bool, false)
-    user_assigned_resource_ids = optional(set(string), [])
-  })
-  default     = {}
-  description = <<IDENTITY
-An object that sets the managed identity configuration for the virtual machine being deployed. Be aware that capabilities such as the Azure Monitor Agent and Role Assignments require that a managed identity has been configured.
-
-- `system_assigned`            = (Optional) Specifies whether the System Assigned Managed Identity should be enabled.  Defaults to false. 
-- `user_assigned_resource_ids` = (Optional) Specifies a set of User Assigned Managed Identity IDs to be assigned to this Virtual Machine.
-
-Example Inputs:
-```hcl
-#default system managed identity
-managed_identities = {
-  system_assigned = true
-}
-#user assigned managed identity only
-managed_identities           = {
-  user_assigned_resource_ids = ["<azure resource ID of a user assigned managed identity>"]
-}
-#user assigned and system assigned managed identities
-managed_identities  = {
-  system_assigned            = true
-  user_assigned_resource_ids = ["<azure resource ID of a user assigned managed identity>"]
-}
-```
-IDENTITY
-  nullable    = false
-}
+# ```
+# IDENTITY
+#   nullable    = false
+# }
 
 # Auto Shutdown TAGS
 
@@ -463,17 +427,19 @@ variable "auto_shutdown_notification_webhook_url" {
 
 # AKV Variables
 
-variable "vm_admin_pwd_keyvault_name" {
-  description = "keyvault name for the vm admin password"
-  type        = string
-  default     = ""
-}
+#will come from data block
 
-variable "machine_creds_akv_rg" {
-  description = "Resource Group of the AKV to store the machine credentials"
-  type        = string
-  default     = ""
-}
+# variable "vm_admin_pwd_keyvault_name" {
+#   description = "keyvault name for the vm admin password"
+#   type        = string
+#   default     = ""
+# }
+
+# variable "machine_creds_akv_rg" {
+#   description = "Resource Group of the AKV to store the machine credentials"
+#   type        = string
+#   default     = ""
+# }
 
 variable "akv_resource_id" {
   description = "Resource ID of the AKV to store the machine credentials. Use this one in case that the AKV is in a different subscription"
@@ -481,11 +447,11 @@ variable "akv_resource_id" {
   default     = null
 }
 
-variable "aad_ssh_login_extension_version" {
-  description = "VM Extension version for Azure Active Directory SSH Login extension"
-  type        = string
-  default     = "1.0"
-}
+# variable "aad_ssh_login_extension_version" {
+#   description = "VM Extension version for Azure Active Directory SSH Login extension"
+#   type        = string
+#   default     = "1.0"
+# }
 
 
 
@@ -494,36 +460,3 @@ variable "tags" {
   description = "tags to add to the vm"
   default     = null
 }
-
-
-variable "team_spn" {
-  description = "The Service Principal Name of the team that will be able to modifyteam resources"
-  type        = list(string)
-  default     = []
-}
-
-
-variable "team_vm_contributor_groups" {
-  description = "The Contributor Group of the team that will be able to modify team resources"
-  type        = list(string)
-  default     = []
-}
-
-variable "team_vm_reader_groups" {
-  description = "The Reader Group of the team that will be able to modify team resources"
-  type        = list(string)
-  default     = []
-}
-
-variable "team_vm_userlogin_groups" {
-  description = "The User Login Group of the team that will be able to modify team resources"
-  type        = list(string)
-  default     = []
-}
-
-variable "team_vm_admin_groups" {
-  description = "The Admin Group of the team that will be able to modify team resources"
-  type        = list(string)
-  default     = []
-}
-

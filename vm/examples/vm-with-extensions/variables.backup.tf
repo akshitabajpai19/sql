@@ -8,12 +8,12 @@ variable "resource_group_vault_recovery" {
 
 }
 
-# variable "recovery_vault_name" {
-#   type        = string
-#   description = "(Optional) - The name of the recovery services vault if exist"
-#   default     = ""
-#   nullable    = false
-# }
+variable "recovery_vault_name" {
+  type        = string
+  description = "(Optional) - The name of the recovery services vault if exist"
+  default     = ""
+  nullable    = false
+}
 
 variable "backup_policy_resource_id" {
   type        = string
