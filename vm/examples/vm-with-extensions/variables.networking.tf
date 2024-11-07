@@ -1,11 +1,17 @@
-
-
-# PIP
-
-variable "public_ip_enabled" {
-  description = "Create and attach a public interface?"
-  type        = bool
-  default     = false
+variable "nsg_diagnostic_settings" {
+  type = map(object({
+    name                                     = optional(string, null)
+    log_categories                           = optional(set(string), [])
+    log_groups                               = optional(set(string), ["allLogs"])
+    metric_categories                        = optional(set(string), ["AllMetrics"])
+    log_analytics_destination_type           = optional(string, "Dedicated")
+    workspace_resource_id                    = optional(string, null)
+    storage_account_resource_id              = optional(string, null)
+    event_hub_authorization_rule_resource_id = optional(string, null)
+    event_hub_name                           = optional(string, null)
+    marketplace_partner_resource_id          = optional(string, null)
+  }))
+  default = {}
 }
 
 variable "public_ip_sku" {
@@ -17,41 +23,6 @@ variable "public_ip_sku" {
     condition     = (contains(["basic", "standard"], lower(var.public_ip_sku)))
     error_message = "Public IP sku can only be \"Basic\" or \"Standard\"."
   }
-}
-
-variable "public_vnet" {
-  description = "Public vnet name for PIP"
-  type        = string
-  default     = ""
-}
-
-variable "public_vnet_rg" {
-  description = "Public vnet resource group for PIP"
-  type        = string
-  default     = ""
-}
-variable "public_subnet" {
-  description = "Public subnet name for PIP"
-  type        = string
-  default     = ""
-}
-
-variable "public_nsg" {
-  description = "Public NSG for the PIP"
-  type        = string
-  default     = ""
-}
-
-variable "public_nsg_rg" {
-  description = "Public NSG resource group for the PIP"
-  type        = string
-  default     = ""
-}
-
-variable "sr_sec_exception" {
-  description = "Security Exception for the public IP"
-  type        = string
-  default     = ""
 }
 
 variable "network_interfaces" {
@@ -216,122 +187,3 @@ NETWORK_INTERFACES
   nullable    = true
   default     = null
 }
-
-
-# variable "public_only" {
-#   description = "Create a public only interface?"
-#   type        = bool
-#   default     = false
-
-# }
-
-
-# AVM NSG
-variable "nsg_diagnostic_settings" {
-  type = map(object({
-    name                                     = optional(string, null)
-    log_categories                           = optional(set(string), [])
-    log_groups                               = optional(set(string), ["allLogs"])
-    metric_categories                        = optional(set(string), ["AllMetrics"])
-    log_analytics_destination_type           = optional(string, "Dedicated")
-    workspace_resource_id                    = optional(string, null)
-    storage_account_resource_id              = optional(string, null)
-    event_hub_authorization_rule_resource_id = optional(string, null)
-    event_hub_name                           = optional(string, null)
-    marketplace_partner_resource_id          = optional(string, null)
-  }))
-  default     = {}
-  description = <<DESCRIPTION
-A map of diagnostic settings to create on the Key Vault. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.
-
-- `name` - (Optional) The name of the diagnostic setting. One will be generated if not set, however this will not be unique if you want to create multiple diagnostic setting resources.
-- `log_categories` - (Optional) A set of log categories to send to the log analytics workspace. Defaults to `[]`.
-- `log_groups` - (Optional) A set of log groups to send to the log analytics workspace. Defaults to `["allLogs"]`.
-- `metric_categories` - (Optional) A set of metric categories to send to the log analytics workspace. Defaults to `["AllMetrics"]`.
-- `log_analytics_destination_type` - (Optional) The destination type for the diagnostic setting. Possible values are `Dedicated` and `AzureDiagnostics`. Defaults to `Dedicated`.
-- `workspace_resource_id` - (Optional) The resource ID of the log analytics workspace to send logs and metrics to.
-- `storage_account_resource_id` - (Optional) The resource ID of the storage account to send logs and metrics to.
-- `event_hub_authorization_rule_resource_id` - (Optional) The resource ID of the event hub authorization rule to send logs and metrics to.
-- `event_hub_name` - (Optional) The name of the event hub. If none is specified, the default event hub will be selected.
-- `marketplace_partner_resource_id` - (Optional) The full ARM resource ID of the Marketplace resource to which you would like to send Diagnostic LogsLogs.
-DESCRIPTION  
-  nullable    = false
-
-  validation {
-    condition     = alltrue([for _, v in var.nsg_diagnostic_settings : contains(["Dedicated", "AzureDiagnostics"], v.log_analytics_destination_type)])
-    error_message = "Log analytics destination type must be one of: 'Dedicated', 'AzureDiagnostics'."
-  }
-  validation {
-    condition = alltrue(
-      [
-        for _, v in var.nsg_diagnostic_settings :
-        v.workspace_resource_id != null || v.storage_account_resource_id != null || v.event_hub_authorization_rule_resource_id != null || v.marketplace_partner_resource_id != null
-      ]
-    )
-    error_message = "At least one of `workspace_resource_id`, `storage_account_resource_id`, `marketplace_partner_resource_id`, or `event_hub_authorization_rule_resource_id`, must be set."
-  }
-}
-
-variable "machine_ssh_port" {
-  description = "The SSH port to be used for the VM"
-  type        = number
-  default     = 22
-  nullable    = false
-}
-
-variable "additional_security_rules" {
-  type = map(object({
-    access                                     = string
-    name                                       = string
-    description                                = optional(string)
-    destination_address_prefix                 = optional(string)
-    destination_address_prefixes               = optional(set(string))
-    destination_application_security_group_ids = optional(set(string))
-    destination_port_range                     = optional(string)
-    destination_port_ranges                    = optional(set(string))
-    direction                                  = string
-    priority                                   = number
-    protocol                                   = string
-    source_address_prefix                      = optional(string)
-    source_address_prefixes                    = optional(set(string))
-    source_application_security_group_ids      = optional(set(string))
-    source_port_range                          = optional(string)
-    source_port_ranges                         = optional(set(string))
-    timeouts = optional(object({
-      create = optional(string)
-      delete = optional(string)
-      read   = optional(string)
-      update = optional(string)
-    }))
-  }))
-  description = <<DESCRIPTION
- - `access` - (Required) Specifies whether network traffic is allowed or denied. Possible values are `Allow` and `Deny`.
- - `name` - (Required) Name of the network security rule to be created.
- - `description` - (Optional) A description for this rule. Restricted to 140 characters.
- - `destination_address_prefix` - (Optional) CIDR or destination IP range or * to match any IP. Tags such as `VirtualNetwork`, `AzureLoadBalancer` and `Internet` can also be used. Besides, it also supports all available Service Tags like ‘Sql.WestEurope‘, ‘Storage.EastUS‘, etc. You can list the available service tags with the CLI: ```shell az network list-service-tags --location westcentralus```. For further information please see [Azure CLI
- - `destination_address_prefixes` - (Optional) List of destination address prefixes. Tags may not be used. This is required if `destination_address_prefix` is not specified.
- - `destination_application_security_group_ids` - (Optional) A List of destination Application Security Group IDs
- - `destination_port_range` - (Optional) Destination Port or Range. Integer or range between `0` and `65535` or `*` to match any. This is required if `destination_port_ranges` is not specified.
- - `destination_port_ranges` - (Optional) List of destination ports or port ranges. This is required if `destination_port_range` is not specified.
- - `direction` - (Required) The direction specifies if rule will be evaluated on incoming or outgoing traffic. Possible values are `Inbound` and `Outbound`.
- - `name` - (Required) The name of the security rule. This needs to be unique across all Rules in the Network Security Group. Changing this forces a new resource to be created.
- - `priority` - (Required) Specifies the priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.
- - `protocol` - (Required) Network protocol this rule applies to. Possible values include `Tcp`, `Udp`, `Icmp`, `Esp`, `Ah` or `*` (which matches all).
- - `resource_group_name` - (Required) The name of the resource group in which to create the Network Security Rule. Changing this forces a new resource to be created.
- - `source_address_prefix` - (Optional) CIDR or source IP range or * to match any IP. Tags such as `VirtualNetwork`, `AzureLoadBalancer` and `Internet` can also be used. This is required if `source_address_prefixes` is not specified.
- - `source_address_prefixes` - (Optional) List of source address prefixes. Tags may not be used. This is required if `source_address_prefix` is not specified.
- - `source_application_security_group_ids` - (Optional) A List of source Application Security Group IDs
- - `source_port_range` - (Optional) Source Port or Range. Integer or range between `0` and `65535` or `*` to match any. This is required if `source_port_ranges` is not specified.
- - `source_port_ranges` - (Optional) List of source ports or port ranges. This is required if `source_port_range` is not specified.
-
- ---
- `timeouts` block supports the following:
- - `create` - (Defaults to 30 minutes) Used when creating the Network Security Rule.
- - `delete` - (Defaults to 30 minutes) Used when deleting the Network Security Rule.
- - `read` - (Defaults to 5 minutes) Used when retrieving the Network Security Rule.
- - `update` - (Defaults to 30 minutes) Used when updating the Network Security Rule.
-DESCRIPTION
-  default     = {}
-  nullable    = false
-}
-
