@@ -173,7 +173,9 @@ module "avm-res-compute-virtualmachine" {
     version   = var.source_image_version
   }
 
-  tags = local.tags_public
+  #tags = local.tags_public
+
+  tags = merge(var.tags, local.tags_public)
 
   timezone = "UTC"
   vm_additional_capabilities = {

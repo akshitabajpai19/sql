@@ -1,19 +1,17 @@
 ## Naming and Tags ##
 
-variable "key_name" {
-  type = string
-}
 
-variable "name" {
-  type        = string
-  description = "The name to use when creating the virtual machine."
-  nullable    = false
+# using a local.name
+# variable "name" {
+#   type        = string
+#   description = "The name to use when creating the virtual machine."
+#   nullable    = false
 
-  validation {
-    condition     = can(regex("^.{1,64}$", var.name))
-    error_message = "virtual machine names for linux must be between 1 and 64 characters in length. Virtual machine name for windows must be between 1 and 20 characters in length."
-  }
-}
+#   validation {
+#     condition     = can(regex("^.{1,64}$", var.name))
+#     error_message = "virtual machine names for linux must be between 1 and 64 characters in length. Virtual machine name for windows must be between 1 and 20 characters in length."
+#   }
+# }
 
 variable "location" {
   description = "The Azure region where resources will be deployed"
@@ -192,22 +190,24 @@ variable "data_disk_type" {
   }
 }
 
-variable "recovery_sku" {
-  description = "The recovery services vault SKU to use"
-  type        = string
-  default     = "Standard"
-}
+# already present in variables.backup.tf
+# variable "recovery_sku" {
+#   description = "The recovery services vault SKU to use"
+#   type        = string
+#   default     = "Standard"
+# }
 
 variable "resource_group_name" {
   description = "name of the resource group where to place the vm"
   type        = string
 }
 
-variable "vm_admin_pwd_keyvault_secret_name" {
-  description = "keyvault secret name for the vm admin password"
-  type        = string
-  default     = ""
-}
+#commenting as not being used
+# variable "vm_admin_pwd_keyvault_secret_name" {
+#   description = "keyvault secret name for the vm admin password"
+#   type        = string
+#   default     = ""
+# }
 
 # VM Size
 variable "virtual_machine_size" {
@@ -228,11 +228,12 @@ variable "kernel_type" {
 }
 
 # Custom Machine Image
-variable "custom_image_id" {
-  description = "Custom machine image ID"
-  type        = string
-  default     = null
-}
+# commenting as not being used to prevent tflint
+# variable "custom_image_id" {
+#   description = "Custom machine image ID"
+#   type        = string
+#   default     = null
+# }
 
 # Custom User Data
 variable "custom_data" {
@@ -487,11 +488,12 @@ variable "akv_resource_id" {
   default     = null
 }
 
-variable "aad_ssh_login_extension_version" {
-  description = "VM Extension version for Azure Active Directory SSH Login extension"
-  type        = string
-  default     = "1.0"
-}
+# commenting as we are going with var.extensions instead of local.linux_extensions
+# variable "aad_ssh_login_extension_version" {
+#   description = "VM Extension version for Azure Active Directory SSH Login extension"
+#   type        = string
+#   default     = "1.0"
+# }
 
 
 
