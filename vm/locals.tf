@@ -62,21 +62,21 @@ locals {
 
   validate_public_ip_has_exception = var.public_ip_enabled ? (var.sr_sec_exception == "" ? file("ERROR: sr_sec_exception must be provided when public_ip_enabled is true.") : true) : true
 
+# commenting this to make it compatible with windows extensions as well
+#   linux_extensions = merge({ login = {
+#     name                       = "AADSSHLogin"
+#     publisher                  = "Microsoft.Azure.ActiveDirectory"
+#     type                       = "AADSSHLoginForLinux"
+#     type_handler_version       = var.aad_ssh_login_extension_version
+#     auto_upgrade_minor_version = true
+#     }
+#     }, {
+#     for k, v in var.extensions : k => v if v.kernel_type == "linux"
+#   })
 
-  linux_extensions = merge({ login = {
-    name                       = "AADSSHLogin"
-    publisher                  = "Microsoft.Azure.ActiveDirectory"
-    type                       = "AADSSHLoginForLinux"
-    type_handler_version       = var.aad_ssh_login_extension_version
-    auto_upgrade_minor_version = true
-    }
-    }, {
-    for k, v in var.extensions : k => v if v.kernel_type == "linux"
-  })
-
-  windows_extensions = merge({
-    for k, v in var.extensions : k => v if v.kernel_type == "windows"
-  })
+#   windows_extensions = merge({
+#     for k, v in var.extensions : k => v if v.kernel_type == "windows"
+#   })
 
 }
 
