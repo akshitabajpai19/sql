@@ -1,6 +1,6 @@
 locals {
-  recovery_name                      = substr("arsv-${local.naming}", 0, 50)
-  role_definition_resource_substring = "/providers/Microsoft.Authorization/roleDefinitions"
+  recovery_name = substr("arsv-${local.naming}", 0, 50)
+  #role_definition_resource_substring = "/providers/Microsoft.Authorization/roleDefinitions" #this is not being used
 
 }
 
