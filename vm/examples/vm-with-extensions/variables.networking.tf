@@ -218,12 +218,12 @@ NETWORK_INTERFACES
 }
 
 
-variable "public_only" {
-  description = "Create a public only interface?"
-  type        = bool
-  default     = false
+# variable "public_only" {
+#   description = "Create a public only interface?"
+#   type        = bool
+#   default     = false
 
-}
+# }
 
 
 # AVM NSG
@@ -335,18 +335,3 @@ DESCRIPTION
   nullable    = false
 }
 
-variable "role_assignments" {
-  type = map(object({
-    role_definition_id_or_name             = string
-    principal_id                           = string
-    condition                              = optional(string, null)
-    condition_version                      = optional(string, null)
-    delegated_managed_identity_resource_id = optional(string, null)
-    description                            = optional(string, null)
-    principal_type                         = optional(string, null)
-    skip_service_principal_aad_check       = optional(bool, false)
-
-    }
-  ))
-  default = {}
-}
