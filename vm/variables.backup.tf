@@ -570,3 +570,8 @@ variable "role_definitions" {
   description = "Define the required role definition"
 }
 
+variable "create_resource_group" {
+  description = "Set this to true if a new RG is required."
+  type        = bool
+  default     = false
+}

@@ -218,12 +218,10 @@ NETWORK_INTERFACES
 }
 
 
-# variable "public_only" {
-#   description = "Create a public only interface?"
-#   type        = bool
-#   default     = false
-
-# }
+resource "validation_warning" "public_only" {
+  condition = var.public_only != null
+  summary   = "WARNING: Deprecation Notice, public_only is not loger used, please remove this variable from your configuration"
+}
 
 
 # AVM NSG

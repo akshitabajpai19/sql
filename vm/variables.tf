@@ -1,17 +1,9 @@
 ## Naming and Tags ##
 
-
-# using a local.name
-# variable "name" {
-#   type        = string
-#   description = "The name to use when creating the virtual machine."
-#   nullable    = false
-
-#   validation {
-#     condition     = can(regex("^.{1,64}$", var.name))
-#     error_message = "virtual machine names for linux must be between 1 and 64 characters in length. Virtual machine name for windows must be between 1 and 20 characters in length."
-#   }
-# }
+resource "validation_warning" "name" {
+  condition = var.name != null
+  summary   = "WARNING: Deprecation Notice, name is not loger used, please remove this variable from your configuration"
+}
 
 variable "location" {
   description = "The Azure region where resources will be deployed"
@@ -190,24 +182,15 @@ variable "data_disk_type" {
   }
 }
 
-# already present in variables.backup.tf
-# variable "recovery_sku" {
-#   description = "The recovery services vault SKU to use"
-#   type        = string
-#   default     = "Standard"
-# }
-
 variable "resource_group_name" {
   description = "name of the resource group where to place the vm"
   type        = string
 }
 
-#commenting as not being used
-# variable "vm_admin_pwd_keyvault_secret_name" {
-#   description = "keyvault secret name for the vm admin password"
-#   type        = string
-#   default     = ""
-# }
+resource "validation_warning" "vm_admin_pwd_keyvault_secret_name" {
+  condition = var.vm_admin_pwd_keyvault_secret_name != null
+  summary   = "WARNING: Deprecation Notice, vm_admin_pwd_keyvault_secret_name is not loger used, please remove this variable from your configuration"
+}
 
 # VM Size
 variable "virtual_machine_size" {
@@ -227,13 +210,11 @@ variable "kernel_type" {
   }
 }
 
-# Custom Machine Image
-# commenting as not being used to prevent tflint
-# variable "custom_image_id" {
-#   description = "Custom machine image ID"
-#   type        = string
-#   default     = null
-# }
+
+resource "validation_warning" "custom_image_id" {
+  condition = var.custom_image_id != null
+  summary   = "WARNING: Deprecation Notice, custom_image_id is not loger used, please remove this variable from your configuration"
+}
 
 # Custom User Data
 variable "custom_data" {

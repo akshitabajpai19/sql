@@ -1,10 +1,10 @@
 locals {
   recovery_name = substr("arsv-${local.naming}", 0, 50)
-  #role_definition_resource_substring = "/providers/Microsoft.Authorization/roleDefinitions" #this is not being used
 
 }
 
 module "recovery" {
+  count                                                       = var.create_resource_group ? 1 : 0
   source                                                      = "../recovery-services-vault"
   recovery_services_vault_name                                = var.recovery_services_vault_name
   location                                                    = var.recovery_location
