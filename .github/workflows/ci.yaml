@@ -40,15 +40,15 @@ jobs:
  
       - name: Run TFLint
         #run: tflint -f compact --recursive
-        run: tflint --chdir="./vnet"
+        run: tflint --chdir="./vnet/examples/testing"
       # Run TFsec to check for security vulnerabilities in Terraform code
       - name: Run TFsec for main directory
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          working_directory: ./vnet  # Adjust this path if needed
+          working_directory: ./vnet/examples/testing  # Adjust this path if needed
  
       # Run TFsec for terraform-modules (optional, based on your folder structure)
       - name: Run TFsec for terraform-modules
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          working_directory: ./vnet  # Adjust path to the module folder.
+          working_directory: ./vnet/examples/testing  # Adjust path to the module folder.
