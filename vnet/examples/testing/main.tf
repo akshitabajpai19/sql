@@ -4,7 +4,7 @@ module "vnet" {
   source                   = "../../"
   app_id                   = var.app_id
   appname                  = var.appname
-  resourcetype             = "vnet"
+  resourcetype             = var.resourcetype
   costAppOwnerManager      = var.costAppOwnerManager
   costAppOwnerTech         = var.costAppOwnerTech
   costBudgetOwner          = var.costBudgetOwner
