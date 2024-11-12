@@ -60,10 +60,7 @@ locals {
 
   tags_public = var.public_ip_enabled ? merge(local.tags, { srEecException = var.sr_sec_exception }) : local.tags
 
-  resource "validation_warning" "validate_public_ip_has_exception" {
-  condition = var.validate_public_ip_has_exception != null
-  summary   = "WARNING: Deprecation Notice, validate_public_ip_has_exception is not loger used, please remove this variable from your configuration"
-}
+  validate_public_ip_has_exception = var.public_ip_enabled ? (var.sr_sec_exception == "" ? file("ERROR: sr_sec_exception must be provided when public_ip_enabled is true.") : true) : true
 
 
 }
