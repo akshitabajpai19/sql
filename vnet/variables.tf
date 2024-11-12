@@ -399,9 +399,3 @@ variable "create_virtual_network" {
   type        = bool
   default     = false
 }
-
-variable "subscription_id" {
-  type        = string
-  default     = null
-  description = "(Optional) Subscription ID passed in by an external process.  If this is not supplied, then the configuration either needs to include the subscription ID, or needs to be supplied properties to create the subscription."
-}
