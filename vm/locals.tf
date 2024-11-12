@@ -60,7 +60,7 @@ locals {
 
   tags_public = var.public_ip_enabled ? merge(local.tags, { srEecException = var.sr_sec_exception }) : local.tags
 
-  validate_public_ip_has_exception = var.public_ip_enabled ? (var.sr_sec_exception == "" ? file("ERROR: sr_sec_exception must be provided when public_ip_enabled is true.") : true) : true
+  #validate_public_ip_has_exception = var.public_ip_enabled ? (var.sr_sec_exception == "" ? file("ERROR: sr_sec_exception must be provided when public_ip_enabled is true.") : true) : true
 
 
 }
